@@ -11,4 +11,18 @@ const getDoctors = (req, res) => {
   })
 }
 
+const getAppointments = (req, res) => {
+  console.log('Controller: getAppointments');
+  let doctorId = req.params.doctorId
+  let date = req.params.date
+  doctorSurgeryService.getAppointments(date, doctorId).then((allAppointments) => {
+    let result = {
+      "message": "Successfully found appointments.",
+      'data': allAppointments
+    }
+    res.json(result)
+  })
+}
+
 module.exports.getDoctors = getDoctors
+module.exports.getAppointments = getAppointments

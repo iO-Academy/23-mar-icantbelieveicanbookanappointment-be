@@ -5,4 +5,10 @@ const getDoctors = async () => {
   return await doctorSurgeryRepository.getDoctors();
 }
 
+const getAppointments = async (date, doctorId) => {
+  console.log('Service: getAppointments')
+  return await doctorSurgeryRepository.getAppointments(date, doctorId);
+}
+
 module.exports.getDoctors = getDoctors
+module.exports.getAppointments = getAppointments
