@@ -1,4 +1,5 @@
 const doctorSurgeryRepository = require('../repositories/doctorSurgeryRepository');
+const bcrypt = require('bcrypt')
 
 const getDoctors = async () => {
   console.log('Service: getDoctors');
@@ -29,8 +30,8 @@ const postLogin = async (user_email_address, user_password) => {
   } else {
       try {
         const result = await doctorSurgeryRepository.postLogin(user_email_address)
-        result[0]['login'] = result[0].password === user_password
-        result[0]['status'] = 200
+        result[0]['login'] = await bcrypt.compare(user_password, result[0].password);
+        result[0]['status'] = 200;
         return result
       } catch {
         result[0]['status'] = 500
