@@ -7,7 +7,7 @@
 #
 # Host: 127.0.0.1 (MySQL 5.5.5-10.11.2-MariaDB-1:10.11.2+maria~ubu2204)
 # Database: doctor_surgery
-# Generation Time: 2023-06-19 08:12:47 +0000
+# Generation Time: 2023-06-19 10:47:17 +0000
 # ************************************************************
 
 
@@ -26,12 +26,13 @@ SET NAMES utf8mb4;
 DROP TABLE IF EXISTS `appointments`;
 
 CREATE TABLE `appointments` (
-  `id` int(11) DEFAULT NULL,
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `patientId` int(11) DEFAULT NULL,
   `doctorId` int(11) DEFAULT NULL,
   `time` int(11) DEFAULT NULL,
   `date` date DEFAULT NULL,
-  `reason` varchar(50) DEFAULT NULL
+  `reason` varchar(50) DEFAULT NULL,
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 LOCK TABLES `appointments` WRITE;
@@ -151,11 +152,11 @@ DROP TABLE IF EXISTS `doctors`;
 
 CREATE TABLE `doctors` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
-  `title` varchar(50) DEFAULT NULL,
-  `first_name` varchar(50) DEFAULT NULL,
-  `last_name` varchar(50) DEFAULT NULL,
-  `email` varchar(50) DEFAULT NULL,
-  `password` varchar(50) DEFAULT NULL,
+  `title` varchar(255) DEFAULT NULL,
+  `first_name` varchar(255) DEFAULT NULL,
+  `last_name` varchar(255) DEFAULT NULL,
+  `email` varchar(255) NOT NULL,
+  `password` varchar(255) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -164,11 +165,11 @@ LOCK TABLES `doctors` WRITE;
 
 INSERT INTO `doctors` (`id`, `title`, `first_name`, `last_name`, `email`, `password`)
 VALUES
-	(1,'Dr','Lèi','Hallbird','shallbird0@ftc.gov','wM4#0jG(N'),
-	(2,'Dr','Maéna','Dorman','cdorman1@stumbleupon.com','hD9|v20|Cc81xd'),
-	(3,'Dr','Maëline','Lavis','slavis2@artisteer.com','aM8!YB(+m@?D*M'),
-	(4,'Dr','Mårten','Sandle','hsandle3@free.fr','qP2?Zc0xP#fH{2'),
-	(5,'Dr','Kuí','Gianinotti','bgianinotti4@rambler.ru','uP6~LHbr&bKM');
+	(1,'Dr','Log','Login','drlogin@icantbelieveit.com','12345678'),
+	(2,'Dr','Ingrid','Input','drinput@icantbelieveit.com','hD9|v20|Cc81xd'),
+	(3,'Dr','Tom','Jones','drjones@icantbelieveit.com','aM8!YB(+m@?D*M'),
+	(4,'Dr','Dom','Domain','drdomain@icantbelieveit.com','qP2?Zc0xP#fH{2'),
+	(5,'Dr','React','Component','drcomponent@icantbelieveit.com','uP6~LHbr&bKM');
 
 /*!40000 ALTER TABLE `doctors` ENABLE KEYS */;
 UNLOCK TABLES;
