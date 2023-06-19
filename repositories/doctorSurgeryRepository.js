@@ -15,7 +15,7 @@ const getAppointments = async (date, doctorId) => {
 }
 
 const addAppointment = async (appointment) => {
-  console.log('Service: addAppointment');
+  console.log('Repository: addAppointment');
   const connection = await dbService.connect();
 
   // Assuming the appointment object properties match the fields in the appointments table
@@ -31,8 +31,9 @@ const addAppointment = async (appointment) => {
   return await connection.query('SELECT * FROM appointments WHERE id = ?', [newAppointmentId]);
 };
 
-const getLogin = async (user_email_address) => {
+const postLogin = async (user_email_address) => {
   {
+    console.log('Repository: postLogin')
     const connection = await dbService.connect()
     let query = `
         SELECT * FROM doctors 
@@ -45,4 +46,4 @@ const getLogin = async (user_email_address) => {
 module.exports.getDoctors = getDoctors
 module.exports.getAppointments = getAppointments
 module.exports.addAppointment = addAppointment
-module.exports.getLogin = getLogin
+module.exports.postLogin = postLogin

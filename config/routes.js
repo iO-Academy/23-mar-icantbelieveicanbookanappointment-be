@@ -1,4 +1,4 @@
-const doctorSurgeryController = require('../controllers/doctorSurgeryControllers')
+const doctorSurgeryController = require('../controllers/doctorSurgeryController')
 
 const routes = (app) => {
   // * Get doctors
@@ -8,9 +8,9 @@ const routes = (app) => {
   // * Add an appointment
   app.post('/appointment', doctorSurgeryController.addAppointment)
   // * Doctor Login Authentication
-  app.post('/login', doctorSurgeryController.getLogin)
+  app.post('/login', doctorSurgeryController.postLogin)
   // * Doctor LogOut
-  app.get('/logout', doctorSurgeryController.getLogOut)
+  app.post('/logout', doctorSurgeryController.postLogOut)
 }
 
 module.exports = routes;

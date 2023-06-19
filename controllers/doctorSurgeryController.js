@@ -49,11 +49,11 @@ const addAppointment = (req, res) => {
       });
 };
 
-const getLogin = (req, res) => {
-  console.log('Controller: getLogin')
+const postLogin = (req, res) => {
+  console.log('Controller: postLogin')
   let user_email_address = req.body.email;
   let user_password = req.body.password;
-  doctorSurgeryService.getLogin(user_email_address, user_password)
+  doctorSurgeryService.postLogin(user_email_address, user_password)
       .then((result) => {
         if (result[0].login) {
           req.session.user_id = result[0].id
@@ -69,15 +69,14 @@ const getLogin = (req, res) => {
   return "Test"
 };
 
-const getLogOut = (req, res, next) => {
+const postLogOut = (req, res, next) => {
   req.session.destroy();
-  res.redirect("/");
 }
 
+// ! ADD ERROR HANDLING
 
 module.exports.getDoctors = getDoctors
 module.exports.getAppointments = getAppointments
 module.exports.addAppointment = addAppointment
-module.exports.getLogin = getLogin
-module.exports.getLogOut = getLogOut
-
+module.exports.postLogin = postLogin
+module.exports.postLogOut = postLogOut

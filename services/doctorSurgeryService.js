@@ -22,18 +22,23 @@ const addAppointment = async (appointment) => {
   }
 }
 
-const getLogin = async (user_email_address, user_password) => {
-  console.log('Service: getLogin')
+const postLogin = async (user_email_address, user_password) => {
+  console.log('Service: postLogin')
   if(!user_email_address || !user_password) {
       return "Incomplete login credentials"
   } else {
-      const result = await doctorSurgeryRepository.getLogin(user_email_address)
-      result[0]['login'] = result[0].password === user_password
-      return result
+      try {
+        const result = await doctorSurgeryRepository.postLogin(user_email_address)
+        result[0]['login'] = result[0].password === user_password
+        result[0]['status'] = 200
+      } catch {
+        result[0]['status'] = 500
+      }
+    return result
   }
 }
 
 module.exports.getDoctors = getDoctors
 module.exports.getAppointments = getAppointments
 module.exports.addAppointment = addAppointment
-module.exports.getLogin = getLogin
+module.exports.postLogin = postLogin
