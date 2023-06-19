@@ -25,18 +25,16 @@ const addAppointment = async (appointment) => {
 const getLogin = (user_email_address, user_password) => {
   console.log('Service: getLogin')
   if(user_email_address && user_password)
-    doctorSurgeryRepository.getLogin(user_email_address).then((result) => {
-      if(result.length > 0)
-      {
-        for(let count = 0; count < data.length; count++)
+    doctorSurgeryRepository.getLogin(user_email_address)
+      .then((result) => {
+        if(result.length > 0)
         {
-          return data[count].user_password === user_password;
+            return (result.user_password === user_password ? "Redirect to doctor admin page" : "Incorrect email or password")
         }
-      }
-      else
-      {
-        return false;
-      }
+        else
+        {
+          return "Incorrect email or password";
+        }
     })
 }
 

@@ -13,8 +13,8 @@ const getDoctors = (req, res) => {
 
 const getAppointments = (req, res) => {
   console.log('Controller: getAppointments');
-  let doctorId = req.query.doctorId
-  let date = req.query.date
+  let doctorId = req.params.doctorId
+  let date = req.params.date
   console.log(doctorId, date)
   doctorSurgeryService.getAppointments(date, doctorId).then((allAppointments) => {
     let result = {
@@ -48,12 +48,13 @@ const addAppointment = (req, res) => {
       });
 };
 
-const getLogin = (req, res, next) => {
+const getLogin = (req, res) => {
   console.log('Controller: getLogin')
   let user_email_address = req.body.email;
   let user_password = req.body.password;
-  doctorSurgeryService.getLogin(user_email_address, user_password)
-
+  doctorSurgeryService.getLogin(user_email_address, user_password).then((result) => {
+      res.message = result
+    })
 };
 
 const getLogOut = (req, res, next) => {
