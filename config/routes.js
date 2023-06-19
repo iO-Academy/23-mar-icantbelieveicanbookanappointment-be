@@ -8,7 +8,7 @@ const routes = (app) => {
   // * Add an appointment
   app.post('/appointment', doctorSurgeryController.addAppointment)
   // * Doctor Login Authentication
-  app.get('/login', doctorSurgeryController.getLogin)
+  app.post('/login', doctorSurgeryController.getLogin)
   // * Doctor LogOut
   app.get('/logout', doctorSurgeryController.getLogOut)
 }

@@ -22,20 +22,19 @@ const addAppointment = async (appointment) => {
   }
 }
 
-const getLogin = (user_email_address, user_password) => {
+const getLogin = async (user_email_address, user_password) => {
   console.log('Service: getLogin')
-  if(user_email_address && user_password)
-    doctorSurgeryRepository.getLogin(user_email_address)
-      .then((result) => {
-        if(result.length > 0)
-        {
-            return (result.user_password === user_password ? "Redirect to doctor admin page" : "Incorrect email or password")
-        }
-        else
-        {
-          return "Incorrect email or password";
-        }
-    })
+  if(!user_email_address || !user_password) {
+      return "Incomplete login credentials"
+  } else {
+      await doctorSurgeryRepository.getLogin(user_email_address)
+          .then((result) => {
+              console.log(result[0].password)
+              let res = (result[0].password === user_password ? "Redirect to doctor admin page" : "Incorrect email or password")
+              console.log(res)
+              return res
+          })
+  }
 }
 
 module.exports.getDoctors = getDoctors

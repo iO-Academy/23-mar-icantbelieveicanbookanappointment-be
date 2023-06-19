@@ -53,8 +53,10 @@ const getLogin = (req, res) => {
   let user_email_address = req.body.email;
   let user_password = req.body.password;
   doctorSurgeryService.getLogin(user_email_address, user_password).then((result) => {
-      res.message = result
-    })
+    console.log(result)
+    return res.json(result)
+  })
+  return "Test"
 };
 
 const getLogOut = (req, res, next) => {
