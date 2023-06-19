@@ -46,31 +46,27 @@
   * **Code:** 500 SERVER ERROR <br />
     **Content:** `{"message": "Unexpected error"}`
 
-UP TO HERE SO FAR
 
-### Return specific artist
+### Add an appointment 
 
 * **URL**
 
-  /artist.php
+  /appointment
 
 * **Method:**
 
-  `GET`
+  `POST`
 
 * **URL Params**
 
   **Required:**
 
-  `name=string`
+  There are no required URL params
 
   **Optional:**
 
   There are no optional URL params
 
-  **Example:**
-
-  `/artist.php?name=Billie Eilish`
 
 * **Success Response:**
 
@@ -82,35 +78,20 @@ UP TO HERE SO FAR
   "name": "Billie Eilish",
   "albums": [
     {
-      "name": "When We All Fall Asleep, Where Do We Go?",
-      "songs": [
-        {
-          "name": "bad guy",
-          "length": "3:28"
-        },
-        {
-          "name": "bury a friend",
-          "length": "3:28"
-        },
-        {
-          "name": "you should see me in a crown",
-          "length": "3:28"
-        }
-      ],
-      "artwork_url": "https://via.placeholder.com/400x400/386641/6A994E?text=The+Memory+of+Trees"
-    }
-  ]
+    "patientId": 30,
+  "doctorId": 3,
+  "time": 12,
+  "date": "2023-06-19",
+  "reason": "Routine check-up"
 }
 ```
 
 * **Error Response:**
 
-    * **Code:** 400 BAD REQUEST <br />
-      **Content:** `{"message": "Unknown artist name"}`
-
     * **Code:** 500 SERVER ERROR <br />
-      **Content:** `{"message": "Unexpected error"}`
+      **Content:** `{"message": "Failed to add appointment."}`
 
+UP TO HERE SO FAR
 
 ### Return popular albums
 
