@@ -38,7 +38,7 @@ const postLogin = async (user_email_address, user_password) => {
           result[0]['status'] = 200
           result[0]['message'] = 'You successfully logged in'
         } else {
-          result[0]['status'] = 400
+          result[0]['status'] = 401
           result[0]['message'] = 'Your username or password was incorrect'
         }
         return result[0]
