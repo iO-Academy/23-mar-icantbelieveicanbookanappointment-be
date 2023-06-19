@@ -6,9 +6,10 @@ const routes = (app) => {
   // * Get appointments
   app.get('/appointments', doctorSurgeryController.getAppointments)
   // // * Add an appointment
-  // app.post('/appointments', doctorSurgeryController.addAppointments)
-  // // * Auth (change next line)
+  app.post('/appointment', doctorSurgeryController.addAppointment)
 
+
+  // // * Auth (change next line)
   // app.get('/categories', robotStoresController.getCategories)
 }
 

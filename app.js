@@ -1,11 +1,15 @@
 const express = require('express');
 const router = require('./config/routes');
 const dotenv = require('dotenv')
+const bodyParser = require('body-parser');
 
 dotenv.config()
 
 const app = express();
 const port = 3001;
+
+// Parse JSON request bodies
+app.use(bodyParser.json());
 
 // * Add all the routes to app
 router(app);
