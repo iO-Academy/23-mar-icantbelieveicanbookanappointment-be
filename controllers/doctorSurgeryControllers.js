@@ -1,4 +1,5 @@
 const doctorSurgeryService = require('../services/doctorSurgeryService')
+const session = require('express-session')
 
 const getDoctors = (req, res) => {
   console.log('Controller: getDoctors');
@@ -52,10 +53,19 @@ const getLogin = (req, res) => {
   console.log('Controller: getLogin')
   let user_email_address = req.body.email;
   let user_password = req.body.password;
-  doctorSurgeryService.getLogin(user_email_address, user_password).then((result) => {
-    console.log(result)
-    return res.json(result)
-  })
+  doctorSurgeryService.getLogin(user_email_address, user_password)
+      .then((result) => {
+        if (result[0].login) {
+          req.session.user_id = result[0].id
+            console.log(req.session)
+        }
+        console.log(req.session)
+        return res.json(result[0].login)
+      })
+      .catch((error) => {
+        console.error('There was an error..', error)
+        res.status(500).json(error)
+      })
   return "Test"
 };
 

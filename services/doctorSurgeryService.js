@@ -27,13 +27,9 @@ const getLogin = async (user_email_address, user_password) => {
   if(!user_email_address || !user_password) {
       return "Incomplete login credentials"
   } else {
-      await doctorSurgeryRepository.getLogin(user_email_address)
-          .then((result) => {
-              console.log(result[0].password)
-              let res = (result[0].password === user_password ? "Redirect to doctor admin page" : "Incorrect email or password")
-              console.log(res)
-              return res
-          })
+      const result = await doctorSurgeryRepository.getLogin(user_email_address)
+      result[0]['login'] = result[0].password === user_password
+      return result
   }
 }
 

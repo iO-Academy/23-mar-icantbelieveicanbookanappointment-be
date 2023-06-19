@@ -2,6 +2,7 @@ const express = require('express');
 const router = require('./config/routes');
 const dotenv = require('dotenv')
 const bodyParser = require('body-parser');
+const session = require('express-session')
 
 dotenv.config()
 
@@ -10,6 +11,14 @@ const port = 3001;
 
 // Parse JSON request bodies
 app.use(bodyParser.json());
+
+app.use(session({
+  secret : 'doctorLogin',
+  resave : true,
+  saveUninitialized : true,
+  cookie : {secure: false, expires: 6000000}
+}));
+
 
 // * Add all the routes to app
 router(app);
