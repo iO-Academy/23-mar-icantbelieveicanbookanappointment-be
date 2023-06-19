@@ -25,6 +25,28 @@ const getAppointments = (req, res) => {
   })
 }
 
+const addAppointment = (req, res) => {
+  console.log('Controller: addAppointment');
+  const appointment = req.body; // Assuming the appointment data is sent in the request body
+
+  // You can perform validation or additional processing on the appointment data if needed
+
+  doctorSurgeryService.addAppointment(appointment)
+      .then((newAppointment) => {
+        const result = {
+          message: 'Successfully added appointment.',
+          data: newAppointment
+        };
+        res.json(result);
+      })
+      .catch((error) => {
+        const result = {
+          message: 'Failed to add appointment.',
+          error: error.message
+        };
+        res.status(500).json(result);
+      });
+};
 
 const getLogin = (req, res, next) => {
   console.log('Controller: getLogin')
@@ -42,5 +64,7 @@ const getLogOut = (req, res, next) => {
 
 module.exports.getDoctors = getDoctors
 module.exports.getAppointments = getAppointments
+module.exports.addAppointment = addAppointment
 module.exports.getLogin = getLogin
 module.exports.getLogOut = getLogOut
+
