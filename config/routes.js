@@ -5,12 +5,10 @@ const routes = (app) => {
   app.get('/doctors', doctorSurgeryController.getDoctors)
   // * Get appointments
   app.get('/appointments', doctorSurgeryController.getAppointments)
-  // // * Add a product
-  // app.post('/products', robotStoresController.addProduct)
-  // // * Get all categories
+  // // * Add an appointment
+  // app.post('/appointments', robotStoresController.addAppointments)
+  // // * Auth (change next line)
   // app.get('/categories', robotStoresController.getCategories)
-  // // * Get all characters
-  // app.get('/characters', robotStoresController.getCharacters)
 }
 
 module.exports = routes;

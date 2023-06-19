@@ -13,9 +13,9 @@ const getDoctors = (req, res) => {
 
 const getAppointments = (req, res) => {
   console.log('Controller: getAppointments');
-  let doctorId = req.params.doctorId
-  let date = req.params.date
-  console.log(date, doctorId)
+  let doctorId = req.query.doctorId
+  let date = req.query.date
+  console.log(req.body)
   doctorSurgeryService.getAppointments(date, doctorId).then((allAppointments) => {
     let result = {
       "message": "Successfully found appointments.",
