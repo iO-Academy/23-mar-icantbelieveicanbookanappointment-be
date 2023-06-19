@@ -25,16 +25,29 @@ const addAppointment = async (appointment) => {
 const postLogin = async (user_email_address, user_password) => {
   console.log('Service: postLogin')
   if(!user_email_address || !user_password) {
-      return "Incomplete login credentials"
+    let response = []
+    response['status'] = 400
+    response['message'] = "Username/ password is missing"
+    return response
   } else {
       try {
         const result = await doctorSurgeryRepository.postLogin(user_email_address)
         result[0]['login'] = result[0].password === user_password
-        result[0]['status'] = 200
+        if (result[0]['login']) {
+          result[0]['status'] = 200
+          result[0]['message'] = 'You successfully logged in'
+        } else {
+          result[0]['status'] = 400
+          result[0]['message'] = 'Your username or password was incorrect'
+        }
+        return result[0]
       } catch {
-        result[0]['status'] = 500
+        let response = []
+        response['status'] = 500
+        response['message'] = "There was a problem connecting to the server"
+        return response
       }
-    return result
+
   }
 }
 

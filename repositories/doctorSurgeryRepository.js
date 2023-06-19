@@ -2,9 +2,13 @@ const dbService = require('../services/dbService')
 
 const getDoctors = async () => {
   console.log('Repository: getDoctors')
-  const connection = await dbService.connect()
-  const doctors = await connection.query('SELECT `id`, `last_name` FROM doctors;');
-  return await doctors
+  try {
+    const connection = await dbService.connect()
+    const doctors = await connection.query('SELECT `id`, `last_name` FROM doctors;');
+    return await doctors
+  } catch {
+
+  }
 }
 
 const getAppointments = async (date, doctorId) => {

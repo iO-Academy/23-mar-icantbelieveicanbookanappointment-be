@@ -3,6 +3,8 @@ const router = require('./config/routes');
 const dotenv = require('dotenv')
 const bodyParser = require('body-parser');
 const session = require('express-session')
+const cors = require('cors')
+
 
 dotenv.config()
 
@@ -19,6 +21,7 @@ app.use(session({
   cookie : {secure: false, expires: 6000000}
 }));
 
+app.use(cors())
 
 // * Add all the routes to app
 router(app);
