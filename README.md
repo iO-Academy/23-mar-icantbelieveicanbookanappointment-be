@@ -65,7 +65,7 @@
 
 * **URL**
 
-  /patient/
+  /patient
 
 * **Method:**
 
@@ -112,7 +112,7 @@
   * **Code:** 400 <br />
     **Content:** ```
     {
-        "message": "This patient does n0t exist",
+        "message": "This patient does not exist",
         "data": 0
     }```
 
