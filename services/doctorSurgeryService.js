@@ -18,6 +18,18 @@ const getPatientId = async (email) => {
   }
 }
 
+const getPatientName = async (patientId) => {
+  console.log('Service: getPatientName');
+  try {
+    const patient = await doctorSurgeryRepository.getPatientName(patientId);
+    console.log('Patient:', patient);
+    return patient;
+  } catch (error) {
+    console.error('Failed to get patient:', error);
+    throw new Error('Failed to get patient.');
+  }
+};
+
 const getAppointments = async (date, doctorId) => {
   console.log('Service: getAppointments')
   return await doctorSurgeryRepository.getAppointments(date, doctorId);
@@ -65,6 +77,7 @@ const postLogin = async (user_email_address, user_password) => {
 
 module.exports.getDoctors = getDoctors
 module.exports.getPatientId = getPatientId
+module.exports.getPatientName = getPatientName;
 module.exports.getAppointments = getAppointments
 module.exports.addAppointment = addAppointment
 module.exports.postLogin = postLogin

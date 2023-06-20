@@ -33,6 +33,35 @@ const getPatientId = (req, res) => {
     })
 }
 
+const getPatientName = (req, res) => {
+    console.log('Controller: getPatientName');
+    const patientId = req.params.patientId;
+
+    doctorSurgeryService.getPatientName(patientId)
+        .then((patient) => {
+            if (patient) {
+                const result = {
+                    message: 'Successfully found patient.',
+                    data: patient
+                };
+                res.json(result);
+            } else {
+                const result = {
+                    message: 'Patient not found.',
+                    data: null
+                };
+                res.json(result);
+            }
+        })
+        .catch((error) => {
+            const result = {
+                message: 'Failed to fetch patient.',
+                error: error.message
+            };
+            res.status(500).json(result);
+        });
+};
+
 const getAppointments = (req, res) => {
     console.log('Controller: getAppointments');
     let doctorId = req.params.doctorId
@@ -103,3 +132,4 @@ module.exports.getAppointments = getAppointments
 module.exports.addAppointment = addAppointment
 module.exports.postLogin = postLogin
 module.exports.postLogOut = postLogOut
+module.exports.getPatientName = getPatientName;
