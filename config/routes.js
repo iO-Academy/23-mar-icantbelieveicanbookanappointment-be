@@ -11,6 +11,14 @@ const routes = (app) => {
   app.post('/login', doctorSurgeryController.postLogin)
   // * Doctor LogOut
   app.post('/logout', doctorSurgeryController.postLogOut)
+  // * Add patient record
+  //app.post('/record', doctorSurgeryController.postRecord)
+  // * Update patient appointment
+  //app.put('/update', doctorSurgeryController.putAppointment)
+  // * Delete patient appointment
+  //app.delete('/delete', doctorSurgeryController.deleteAppointment)
+  // * Get patient records
+  //app.get('/records', doctorSurgeryController.getRecords)
 }
 
 module.exports = routes;
