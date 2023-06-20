@@ -32,10 +32,24 @@
     "message": "Successfully found doctors.",
     "data": [
         {
-            "first_name": "Lèi"
+            "id": 1,
+            "last_name": "Login"
         },
         {
-            "first_name": "Maéna"
+            "id": 2,
+            "last_name": "Input"
+        },
+        {
+            "id": 3,
+            "last_name": "Jones"
+        },
+        {
+            "id": 4,
+            "last_name": "Domain"
+        },
+        {
+            "id": 5,
+            "last_name": "Component"
         }
     ]
 }
@@ -67,7 +81,22 @@
 
   There are no optional URL params
 
+* **Body Data**
 
+  Must be sent as JSON with the correct headers
+
+  **Required:**
+
+    ```json
+    {
+      "patientId": "String",
+      "doctorId": "String",
+      "time": "Int",
+      "date": "YYYY-MM-DD",
+      "reason": "String"
+    }
+    ```
+    
 * **Success Response:**
 
     * **Code:** 200 <br />
@@ -75,14 +104,7 @@
 
 ```json
 {
-  "name": "Billie Eilish",
-  "albums": [
-    {
-    "patientId": 30,
-  "doctorId": 3,
-  "time": 12,
-  "date": "2023-06-19",
-  "reason": "Routine check-up"
+  "success" = "true"
 }
 ```
 
@@ -91,13 +113,11 @@
     * **Code:** 500 SERVER ERROR <br />
       **Content:** `{"message": "Failed to add appointment."}`
 
-UP TO HERE SO FAR
-
-### Return popular albums
+### Return appointments by date and doctor
 
 * **URL**
 
-  /popularAlbums.php
+  /getAppointments/:date/:doctorId
 
 * **Method:**
 
@@ -115,46 +135,24 @@ UP TO HERE SO FAR
 
   **Example:**
 
-  `/popularAlbums.php
+  `/getAppointments/2023-06-23/3`
 
 * **Success Response:**
 
-  * **Code:** 200 <br />
-    **Content:** <br />
+  * **Message:** "Successfully found appointments <br />
+    **Data:** <br />
 
 ```json
-[
-  {
-    "artist": "Billie Eilish",
-    "name": "When We All Fall Asleep, Where Do We Go?",
-    "songs": [
-      "bad guy",
-      "bury a friend",
-      "you should see me in a crown"
-    ],
-    "artwork_url": "https://via.placeholder.com/50x50/386641/6A994E?text=The+Memory+of+Trees"
-  }    ,
-  {
-    "artist": "Taylor Swift",
-    "name": "Lover",
-    "songs": [
-      "ME!",
-      "You Need To Calm Down",
-      "Lover"
-    ],
-    "artwork_url": "https://via.placeholder.com/50x50/386641/6A994E?text=The+Memory+of+Trees"
-  },
-  {
-    "artist": "Ed Sheeran",
-    "name": "÷",
-    "songs": [
-      "Shape of You",
-      "Castle on the Hill",
-      "Galway Girl"
-    ],
-    "artwork_url": "https://via.placeholder.com/50x50/386641/6A994E?text=The+Memory+of+Trees"
-  }
-]
+{
+    "message": "Successfully found appointments.",
+    "data": [
+        {
+            "patientId": 46,
+            "time": 15,
+            "reason": "implement one-to-one infomediaries"
+        }
+    ]
+}
 ```
 
 * **Error Response:**
@@ -162,11 +160,11 @@ UP TO HERE SO FAR
   * **Code:** 500 SERVER ERROR <br />
     **Content:** `{"message": "Unexpected error"}`
 
-### Mark a song as recently played
+### Login as a Doctor
 
 * **URL**
 
-  /songPlayed.php
+  /login
 
 * **Method:**
 
@@ -190,22 +188,16 @@ UP TO HERE SO FAR
 
     ```json
     {
-      "name": "String",
-      "artist": "String"
+      "email": "String",
+      "password": "String"
     }
     ```
 
-  **Example:**
-
-  `/songPlayed.php`
-
 * **Success Response:**
-
-    * **Code:** 201 CREATED <br />
-      **Content:** <br />
+Session created using Express Session
 
   ```json
-  {"message": "Successfully recorded play."}
+  {"success": "true"}
   ```
 
 * **Error Response:**
@@ -217,15 +209,15 @@ UP TO HERE SO FAR
       **Content:** `{"message": "Unexpected error", "data": []}`
 
 
-### Return recently played songs
+### Logout a Doctor
 
 * **URL**
 
-  /recentSongs.php
+  /logout
 
 * **Method:**
 
-  `GET`
+  `POST`
 
 * **URL Params**
 
@@ -237,39 +229,9 @@ UP TO HERE SO FAR
 
   There are no optional URL params
 
-  **Example:**
-
-  `/recentSongs.php
-
 * **Success Response:**
 
-  * **Code:** 200 <br />
-    **Content:** <br />
-
-```json
-[
-  {
-    "name": "Song title 1",
-    "artist": "Artist 1",
-    "length": "3:28",
-    "artwork_url": "https://via.placeholder.com/400x400/386641/6A994E?text=The+Memory+of+Trees"
-  },
-  {
-    "name": "Song title 2",
-    "artist": "Artist 2",
-    "length": "3:28",
-    "artwork_url": "https://via.placeholder.com/400x400/386641/6A994E?text=The+Memory+of+Trees"
-  },
-  {
-    "name": "Song title 3",
-    "artist": "Artist 3",
-    "length": "3:28",
-    "artwork_url": "https://via.placeholder.com/400x400/386641/6A994E?text=The+Memory+of+Trees"
-  }
-]
-```
+Destroys session
 
 * **Error Response:**
 
-  * **Code:** 500 SERVER ERROR <br />
-    **Content:** `{"message": "Unexpected error"}`
