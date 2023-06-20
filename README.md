@@ -147,11 +147,11 @@
 
     ```json
     {
-      "patientId": "String",
-      "doctorId": "String",
-      "time": "Int",
+      "patientId": "int",
+      "doctorId": "int",
+      "time": "int",
       "date": "YYYY-MM-DD",
-      "reason": "String"
+      "reason": "string"
     }
     ```
     
