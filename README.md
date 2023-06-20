@@ -59,8 +59,66 @@
 
   * **Code:** 500 SERVER ERROR <br />
     **Content:** `{"message": "Unexpected error"}`
+    
+
+### Get a patient ID by email
+
+* **URL**
+
+  /patient/
+
+* **Method:**
+
+  `POST`
+
+* **URL Params**
+
+  **Required:**
+
+  There are no required URL params
 
 
+  **Optional:**
+  
+  There are no optional URL params
+  
+
+* **Body Data**
+
+  Must be sent as JSON with the correct headers
+
+  **Required:**
+
+    ```json
+    {
+       "email" : "string"
+    }
+    ```
+    
+* **Success Response:**
+
+    * **Code:** 200 <br />
+      **Content:** <br />
+
+```json
+{
+    "message": "Successfully found patient.",
+    "data": 1
+}
+```
+
+* **Error Response:**
+  
+  * **Code:** 400 <br />
+    **Content:** ```
+    {
+        "message": "This patient does n0t exist",
+        "data": 0
+    }```
+
+  * **Code:** 500 SERVER ERROR <br />
+    **Content:** `{"message": "Unexpected error"}`
+    
 ### Add an appointment 
 
 * **URL**
