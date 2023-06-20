@@ -12,6 +12,27 @@ const getDoctors = (req, res) => {
     })
 }
 
+const getPatientId = (req, res) => {
+    console.log('Controller: getPatientId')
+    let email = req.body.email
+    doctorSurgeryService.getPatientId(email).then((patientId) => {
+        // let result = {}
+        if (patientId[0]) {
+        let result = {
+            "message": "Succesfully found patient ID",
+            'data': patientId[0].id
+        }
+        return res.json(result)
+        } else {
+            let result = {
+                "message": "This patient does not exist",
+                'data': 0
+            }
+        return res.json(result)
+        }
+    })
+}
+
 const getAppointments = (req, res) => {
     console.log('Controller: getAppointments');
     let doctorId = req.params.doctorId
@@ -77,6 +98,7 @@ const postLogOut = (req, res, next) => {
 // ! ADD ERROR HANDLING
 
 module.exports.getDoctors = getDoctors
+module.exports.getPatientId = getPatientId
 module.exports.getAppointments = getAppointments
 module.exports.addAppointment = addAppointment
 module.exports.postLogin = postLogin

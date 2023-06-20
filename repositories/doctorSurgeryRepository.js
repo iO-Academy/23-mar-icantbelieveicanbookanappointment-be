@@ -11,6 +11,19 @@ const getDoctors = async () => {
   }
 }
 
+const getPatientId = async (email) => {
+  {
+    console.log('Repository: getPatientId')
+    console.log(email)
+    const connection = await dbService.connect()
+    let query = `
+        SELECT id FROM patients 
+        WHERE email = "${email}"
+        `;
+    return connection.query(query);
+  }
+}
+
 const getAppointments = async (date, doctorId) => {
   console.log('Repository: getAppointments')
   const connection = await dbService.connect()
@@ -48,6 +61,7 @@ const postLogin = async (user_email_address) => {
 }
 
 module.exports.getDoctors = getDoctors
+module.exports.getPatientId = getPatientId
 module.exports.getAppointments = getAppointments
 module.exports.addAppointment = addAppointment
 module.exports.postLogin = postLogin
