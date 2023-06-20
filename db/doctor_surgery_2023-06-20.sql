@@ -7,7 +7,7 @@
 #
 # Host: 127.0.0.1 (MySQL 5.5.5-10.11.2-MariaDB-1:10.11.2+maria~ubu2204)
 # Database: doctor_surgery
-# Generation Time: 2023-06-20 11:30:50 +0000
+# Generation Time: 2023-06-20 13:50:41 +0000
 # ************************************************************
 
 
@@ -488,11 +488,11 @@ LOCK TABLES `doctors` WRITE;
 
 INSERT INTO `doctors` (`id`, `title`, `first_name`, `last_name`, `email`, `password`)
 VALUES
-	(1,'Dr','Log','Login','drlogin@icantbelieveit.com','12345678'),
-	(2,'Dr','Ingrid','Input','drinput@icantbelieveit.com','hD9|v20|Cc81xd'),
-	(3,'Dr','Tom','Jones','drjones@icantbelieveit.com','aM8!YB(+m@?D*M'),
-	(4,'Dr','Dom','Domain','drdomain@icantbelieveit.com','qP2?Zc0xP#fH{2'),
-	(5,'Dr','React','Component','drcomponent@icantbelieveit.com','uP6~LHbr&bKM');
+	(1,'Dr','Log','Login','drlogin@icantbelieveit.com','$2b$10$R5GWJF76NfzFbfhVpanBjey386avMeKdBxWaO/.0wWphi4hqLo.sO'),
+	(2,'Dr','Ingrid','Input','drinput@icantbelieveit.com','$2b$10$1KIdtYvF6h0vovLWTeWmpezro0vwe47yJJjxQicQhxHbicAs.sEpi'),
+	(3,'Dr','Tom','Jones','drjones@icantbelieveit.com','$2b$10$MMgyUY56it.LnOvx10Hwse02EOe4H.q/YKH9ROHDdbDqDFPAXaq8W'),
+	(4,'Dr','Dom','Domain','drdomain@icantbelieveit.com','$2b$10$9ZInFt7VXeuTFUxvPXcB7uOjfxwW3UzGJq0TfCVty/Clkma8ERu5K'),
+	(5,'Dr','React','Component','drcomponent@icantbelieveit.com','$2b$10$jDsrDG5WItSk5LXVq5Oc/.bJ4U34fwDf43QbLavO0hy4/U9WFMVFW');
 
 /*!40000 ALTER TABLE `doctors` ENABLE KEYS */;
 UNLOCK TABLES;
