@@ -24,6 +24,19 @@ const getPatientId = async (email) => {
   }
 }
 
+const getPatientName = async (patientId) => {
+  console.log('Repository: getPatientName');
+  try {
+    const connection = await dbService.connect();
+    const query = 'SELECT * FROM patients WHERE id = ?';
+    const result = await connection.query(query, [patientId]);
+    return result[0]; // Assuming patientId is unique and returns only one row
+  } catch (error) {
+    console.error('Failed to get patient name:', error);
+    throw new Error('Failed to get patient name.');
+  }
+};
+
 const getAppointments = async (date, doctorId) => {
   console.log('Repository: getAppointments')
   const connection = await dbService.connect()
@@ -62,6 +75,7 @@ const postLogin = async (user_email_address) => {
 
 module.exports.getDoctors = getDoctors
 module.exports.getPatientId = getPatientId
+module.exports.getPatientName = getPatientName;
 module.exports.getAppointments = getAppointments
 module.exports.addAppointment = addAppointment
 module.exports.postLogin = postLogin
