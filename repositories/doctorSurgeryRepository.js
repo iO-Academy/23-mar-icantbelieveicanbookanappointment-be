@@ -2,13 +2,9 @@ const dbService = require('../services/dbService')
 
 const getDoctors = async () => {
   console.log('Repository: getDoctors')
-  try {
     const connection = await dbService.connect()
     const doctors = await connection.query('SELECT `id`, `last_name` FROM doctors;');
     return await doctors
-  } catch {
-
-  }
 }
 
 const getPatientId = async (email) => {
@@ -73,9 +69,38 @@ const postLogin = async (user_email_address) => {
   }
 }
 
+const getPatientRecord = async (patientId) => {
+  console.log('Repository: getPatientRecord')
+  const connection = await dbService.connect()
+  let query = `
+    SELECT appointments.id, doctors.last_name AS doctor, time, date, reason, records.notes, records.prescriptions
+    FROM appointments
+    INNER JOIN records 
+    ON appointments.id = records.appointmentId
+    INNER JOIN doctors
+    ON appointments.doctorId = doctors.id
+    WHERE appointments.patientId = ${patientId}
+`
+  return connection.query(query);
+}
+
+const postPatientRecord = async (record) => {
+  console.log('Repository: postPatientRecord');
+  const connection = await dbService.connect();
+
+  const {appointmentId, notes, prescriptions} = record;
+
+  const query = 'INSERT INTO records (appointmentId, notes, prescriptions) VALUES (?, ?, ?)';
+  const values = [appointmentId, notes, prescriptions];
+
+  return connection.query(query, values);
+}
+
 module.exports.getDoctors = getDoctors
 module.exports.getPatientId = getPatientId
 module.exports.getPatientName = getPatientName;
 module.exports.getAppointments = getAppointments
 module.exports.addAppointment = addAppointment
 module.exports.postLogin = postLogin
+module.exports.getPatientRecord = getPatientRecord
+module.exports.postPatientRecord = postPatientRecord
