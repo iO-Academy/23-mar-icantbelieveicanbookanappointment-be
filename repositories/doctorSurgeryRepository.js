@@ -73,10 +73,12 @@ const getPatientRecord = async (patientId) => {
   console.log('Repository: getPatientRecord')
   const connection = await dbService.connect()
   let query = `
-    SELECT appointments.id, patientId, doctorId, time, date, reason, records.notes, records.prescriptions
+    SELECT appointments.id, doctors.last_name AS doctor, time, date, reason, records.notes, records.prescriptions
     FROM appointments
     INNER JOIN records 
     ON appointments.id = records.appointmentId
+    INNER JOIN doctors
+    ON appointments.doctorId = doctors.id
     WHERE appointments.patientId = ${patientId}
 `
   return connection.query(query);
