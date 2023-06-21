@@ -4,7 +4,7 @@ const routes = (app) => {
   // * Get doctors
   app.get('/doctors', doctorSurgeryController.getDoctors)
   // * Get patient ID
-  app.post('/patient', doctorSurgeryController.getPatientId)
+  app.get('/patient', doctorSurgeryController.getPatientId)
   // * Get patient Name
   app.get('/patient/:patientId', doctorSurgeryController.getPatientName)
   // * Get appointments
