@@ -7,7 +7,7 @@
 #
 # Host: 127.0.0.1 (MySQL 5.5.5-10.11.2-MariaDB-1:10.11.2+maria~ubu2204)
 # Database: doctor_surgery
-# Generation Time: 2023-06-20 13:50:41 +0000
+# Generation Time: 2023-06-21 13:33:06 +0000
 # ************************************************************
 
 
@@ -26,12 +26,13 @@ SET NAMES utf8mb4;
 DROP TABLE IF EXISTS `appointments`;
 
 CREATE TABLE `appointments` (
-  `id` int(11) DEFAULT NULL,
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `patientId` int(11) DEFAULT NULL,
   `doctorId` int(11) DEFAULT NULL,
   `time` int(11) DEFAULT NULL,
   `date` date DEFAULT NULL,
-  `reason` varchar(50) DEFAULT NULL
+  `reason` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 LOCK TABLES `appointments` WRITE;
@@ -39,7 +40,10 @@ LOCK TABLES `appointments` WRITE;
 
 INSERT INTO `appointments` (`id`, `patientId`, `doctorId`, `time`, `date`, `reason`)
 VALUES
+	(1,1,1,9,'2023-06-21','etestile dysfunction'),
+	(2,1,1,10,'2023-06-21','back again?!'),
 	(3,22,3,9,'2023-06-28','synergize best-of-breed web services'),
+	(4,1,1,11,'2023-06-21','test results'),
 	(8,5,2,9,'2023-06-26','facilitate global initiatives'),
 	(9,46,4,10,'2023-07-05','transition 24/365 platforms'),
 	(10,32,5,15,'2023-07-06','innovate plug-and-play deliverables'),
@@ -505,9 +509,9 @@ DROP TABLE IF EXISTS `patients`;
 
 CREATE TABLE `patients` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
-  `first_name` varchar(50) DEFAULT NULL,
-  `last_name` varchar(50) DEFAULT NULL,
-  `email` varchar(50) DEFAULT NULL,
+  `first_name` varchar(255) DEFAULT NULL,
+  `last_name` varchar(255) DEFAULT NULL,
+  `email` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -568,6 +572,33 @@ VALUES
 	(50,'Davie','Roullier','droullier1d@hexun.com');
 
 /*!40000 ALTER TABLE `patients` ENABLE KEYS */;
+UNLOCK TABLES;
+
+
+# Dump of table records
+# ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `records`;
+
+CREATE TABLE `records` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `appointmentId` int(11) DEFAULT NULL,
+  `notes` varchar(511) DEFAULT NULL,
+  `prescriptions` varchar(511) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+LOCK TABLES `records` WRITE;
+/*!40000 ALTER TABLE `records` DISABLE KEYS */;
+
+INSERT INTO `records` (`id`, `appointmentId`, `notes`, `prescriptions`)
+VALUES
+	(1,1,'should test that','everything'),
+	(2,2,'why has this patient booked back to back appointments?','a friend'),
+	(5,4,'Does this work?','A break'),
+	(6,34,'test','date pls');
+
+/*!40000 ALTER TABLE `records` ENABLE KEYS */;
 UNLOCK TABLES;
 
 
