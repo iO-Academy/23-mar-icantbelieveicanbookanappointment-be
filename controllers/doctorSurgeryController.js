@@ -120,7 +120,8 @@ const postLogin = (req, res) => {
             }
             console.log(req.session)
             return res.status(result.status).json({
-              "success": result.login
+                "success": result.login,
+                "doctorId": result.id
             })
           })
     } catch (error) {
