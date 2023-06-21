@@ -75,9 +75,31 @@ const postLogin = async (user_email_address, user_password) => {
   }
 }
 
+const postPatientRecord = async (record) => {
+  console.log('Service: postPatientRecord')
+  return doctorSurgeryRepository.postPatientRecord(record).then(result => result.insertId);
+}
+
+const getPatientRecord = async (patientId) => {
+  console.log('Service: getPatientRecord')
+  return doctorSurgeryRepository.getPatientRecord(patientId).then((result) => {
+    result.forEach((record) => {
+      let date = new Date(Date.parse(record.date))
+      let day = date.getDate();
+      let month = date.getMonth();
+      let year = date.getFullYear();
+
+      record.date = year + '-' + month + '-' + day
+    })
+    return result
+  });
+}
+
 module.exports.getDoctors = getDoctors
 module.exports.getPatientId = getPatientId
 module.exports.getPatientName = getPatientName;
 module.exports.getAppointments = getAppointments
 module.exports.addAppointment = addAppointment
 module.exports.postLogin = postLogin
+module.exports.getPatientRecord = getPatientRecord
+module.exports.postPatientRecord = postPatientRecord

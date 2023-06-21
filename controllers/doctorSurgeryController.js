@@ -37,29 +37,37 @@ const getPatientName = (req, res) => {
     console.log('Controller: getPatientName');
     const patientId = req.params.patientId;
 
-    doctorSurgeryService.getPatientName(patientId)
-        .then((patient) => {
-            if (patient) {
+    if (req.session.user_id) {
+        doctorSurgeryService.getPatientName(patientId)
+            .then((patient) => {
+                if (patient) {
+                    const result = {
+                        message: 'Successfully found patient.',
+                        data: patient
+                    };
+                    res.json(result);
+                } else {
+                    const result = {
+                        message: 'Patient not found.',
+                        data: null
+                    };
+                    res.json(result);
+                }
+            })
+            .catch((error) => {
                 const result = {
-                    message: 'Successfully found patient.',
-                    data: patient
+                    message: 'Failed to fetch patient.',
+                    error: error.message
                 };
-                res.json(result);
-            } else {
-                const result = {
-                    message: 'Patient not found.',
-                    data: null
-                };
-                res.json(result);
-            }
-        })
-        .catch((error) => {
-            const result = {
-                message: 'Failed to fetch patient.',
-                error: error.message
-            };
-            res.status(500).json(result);
-        });
+                res.status(500).json(result);
+            });
+    } else {
+        let result = {
+            message: `You're not logged in.`,
+            error: '401'
+        };
+        res.status(400).json(result)
+    }
 };
 
 const getAppointments = (req, res) => {
@@ -124,6 +132,31 @@ const postLogOut = (req, res, next) => {
     req.session.destroy();
 }
 
+const getPatientRecord = (req, res) => {
+    console.log('Controller: getPatientsHistory')
+    let patientId = req.params.patientId
+    doctorSurgeryService.getPatientRecord(patientId).then((records) => {
+        let result = {
+            "message": "Successfully found appointments.",
+            'data': records
+        }
+        console.log(result)
+        return res.json(result)
+    })
+}
+
+const postPatientRecord = (req, res) => {
+    console.log('Controller: postPatientsHistory')
+    let record = req.body
+    doctorSurgeryService.postPatientRecord(record).then((insertId) => {
+    let result = {
+        "success": true,
+        "recordId": insertId
+    }
+    return res.json(result)
+    })
+}
+
 // ! ADD ERROR HANDLING
 
 module.exports.getDoctors = getDoctors
@@ -133,3 +166,5 @@ module.exports.addAppointment = addAppointment
 module.exports.postLogin = postLogin
 module.exports.postLogOut = postLogOut
 module.exports.getPatientName = getPatientName;
+module.exports.getPatientRecord = getPatientRecord
+module.exports.postPatientRecord = postPatientRecord

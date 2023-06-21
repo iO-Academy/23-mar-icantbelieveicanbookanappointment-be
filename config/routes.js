@@ -16,13 +16,13 @@ const routes = (app) => {
   // * Doctor LogOut
   app.post('/logout', doctorSurgeryController.postLogOut)
   // * Add patient record
-  //app.post('/record', doctorSurgeryController.postRecord)
+  app.post('/record', doctorSurgeryController.postPatientRecord)
+  // * Get patient records
+  app.get('/record/:patientId', doctorSurgeryController.getPatientRecord)
   // * Update patient appointment
   //app.put('/update', doctorSurgeryController.putAppointment) //email API
   // * Delete patient appointment
   //app.delete('/delete', doctorSurgeryController.deleteAppointment) //email API
-  // * Get patient records
-  //app.get('/records', doctorSurgeryController.getRecords)
 }
 
 module.exports = routes;
