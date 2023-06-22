@@ -1,49 +1,41 @@
-const doctorSurgeryRepository = require('../repositories/doctorSurgeryRepository');
+const doctorSurgeryRepository = require('../repositories/doctorSurgeryRepository')
 const bcrypt = require('bcrypt')
 
 const getDoctors = async () => {
-  console.log('Service: getDoctors');
-  return await doctorSurgeryRepository.getDoctors();
+  console.log('Service: getDoctors')
+  return await doctorSurgeryRepository.getDoctors()
 }
 
 const getPatientId = async (email) => {
   console.log('Service: getPatientId')
   try {
-    const patientId = await doctorSurgeryRepository.getPatientId(email);
-    console.log('PatientId:', patientId);
-    return patientId;
+    const patientId = await doctorSurgeryRepository.getPatientId(email)
+    return patientId
   } catch (error) {
-    console.error('Failed to get patientId:', error);
-    throw new Error('Failed to get patientId.');
+    throw new Error('Failed to get patientId.')
   }
 }
 
 const getPatientName = async (patientId) => {
-  console.log('Service: getPatientName');
+  console.log('Service: getPatientName')
   try {
-    const patient = await doctorSurgeryRepository.getPatientName(patientId);
-    console.log('Patient:', patient);
-    return patient;
+    return await doctorSurgeryRepository.getPatientName(patientId)
   } catch (error) {
-    console.error('Failed to get patient:', error);
-    throw new Error('Failed to get patient.');
+    throw new Error('Failed to get patient.')
   }
 };
 
 const getAppointments = async (date, doctorId) => {
   console.log('Service: getAppointments')
-  return await doctorSurgeryRepository.getAppointments(date, doctorId);
+  return await doctorSurgeryRepository.getAppointments(date, doctorId)
 }
 
 const addAppointment = async (appointment) => {
-  console.log('Service: addAppointment');
+  console.log('Service: addAppointment')
   try {
-    const newAppointment = await doctorSurgeryRepository.addAppointment(appointment);
-    console.log('New appointment:', newAppointment);
-    return newAppointment;
+    return await doctorSurgeryRepository.addAppointment(appointment)
   } catch (error) {
-    console.error('Failed to add appointment:', error);
-    throw new Error('Failed to add appointment.');
+    throw new Error('Failed to add appointment.')
   }
 }
 
@@ -57,7 +49,7 @@ const postLogin = async (user_email_address, user_password) => {
   } else {
       try {
         const result = await doctorSurgeryRepository.postLogin(user_email_address)
-        result[0]['login'] = await bcrypt.compare(user_password, result[0].password);
+        result[0]['login'] = await bcrypt.compare(user_password, result[0].password)
         if (result[0]['login']) {
           result[0]['status'] = 200
           result[0]['message'] = 'You successfully logged in'
@@ -77,7 +69,7 @@ const postLogin = async (user_email_address, user_password) => {
 
 const postPatientRecord = async (record) => {
   console.log('Service: postPatientRecord')
-  return doctorSurgeryRepository.postPatientRecord(record).then(result => result.insertId);
+  return doctorSurgeryRepository.postPatientRecord(record).then(result => result.insertId)
 }
 
 const getPatientRecord = async (patientId) => {
@@ -85,19 +77,19 @@ const getPatientRecord = async (patientId) => {
   return doctorSurgeryRepository.getPatientRecord(patientId).then((result) => {
     result.forEach((record) => {
       let date = new Date(Date.parse(record.date))
-      let day = date.getDate();
-      let month = date.getMonth();
-      let year = date.getFullYear();
+      let day = date.getDate()
+      let month = date.getMonth()
+      let year = date.getFullYear()
 
       record.date = year + '-' + month + '-' + day
     })
     return result
-  });
+  })
 }
 
 module.exports.getDoctors = getDoctors
 module.exports.getPatientId = getPatientId
-module.exports.getPatientName = getPatientName;
+module.exports.getPatientName = getPatientName
 module.exports.getAppointments = getAppointments
 module.exports.addAppointment = addAppointment
 module.exports.postLogin = postLogin
