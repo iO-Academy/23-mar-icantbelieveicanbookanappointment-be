@@ -59,8 +59,9 @@ const getPatientName = (req, res) => {
                     error: error.message
                 };
                 res.status(500).json(result);
-            });
-    }
+            })
+};
+
 
 const getAppointments = (req, res) => {
     console.log('Controller: getAppointments');
