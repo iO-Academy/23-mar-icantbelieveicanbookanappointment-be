@@ -126,11 +126,11 @@ const postLogOut = (req, res, next) => {
 }
 
 const getPatientRecord = (req, res) => {
-    console.log('Controller: getPatientsHistory')
+    console.log('Controller: getPatientsRecord')
     let patientId = req.params.patientId
     doctorSurgeryService.getPatientRecord(patientId).then((records) => {
         let result = {
-            "message": "Successfully found appointments.",
+            "message": "Successfully found patient records.",
             'data': records
         }
         console.log(result)
