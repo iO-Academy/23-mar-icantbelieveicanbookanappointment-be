@@ -37,7 +37,7 @@ const getPatientName = (req, res) => {
     console.log('Controller: getPatientName');
     const patientId = req.params.patientId;
 
-    if (req.session.user_id) {
+
         doctorSurgeryService.getPatientName(patientId)
             .then((patient) => {
                 if (patient) {
@@ -60,14 +60,7 @@ const getPatientName = (req, res) => {
                     error: error.message
                 };
                 res.status(500).json(result);
-            });
-    } else {
-        let result = {
-            message: `You're not logged in.`,
-            error: '401'
-        };
-        res.status(400).json(result)
-    }
+            })
 };
 
 const getAppointments = (req, res) => {

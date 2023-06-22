@@ -70,8 +70,8 @@ const postLogin = async (user_email_address) => {
 }
 
 const getPatientRecord = async (patientId) => {
-  console.log('Repository: getPatientRecord')
-  const connection = await dbService.connect()
+  console.log('Repository: getPatientRecord');
+  const connection = await dbService.connect();
   let query = `
     SELECT appointments.id, doctors.last_name AS doctor, time, date, reason, records.notes, records.prescriptions
     FROM appointments
@@ -79,10 +79,11 @@ const getPatientRecord = async (patientId) => {
     ON appointments.id = records.appointmentId
     INNER JOIN doctors
     ON appointments.doctorId = doctors.id
-    WHERE appointments.patientId = ${patientId}
-`
-  return connection.query(query);
-}
+    WHERE appointments.patientId = ?
+`;
+  return connection.query(query, [patientId]);
+};
+
 
 const postPatientRecord = async (record) => {
   console.log('Repository: postPatientRecord');
