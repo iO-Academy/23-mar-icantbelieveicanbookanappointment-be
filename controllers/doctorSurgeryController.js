@@ -37,7 +37,6 @@ const getPatientName = (req, res) => {
     console.log('Controller: getPatientName');
     const patientId = req.params.patientId;
 
-
         doctorSurgeryService.getPatientName(patientId)
             .then((patient) => {
                 if (patient) {
@@ -62,6 +61,7 @@ const getPatientName = (req, res) => {
                 res.status(500).json(result);
             })
 };
+
 
 const getAppointments = (req, res) => {
     console.log('Controller: getAppointments');
@@ -140,7 +140,7 @@ const getPatientRecord = (req, res) => {
 }
 
 const postPatientRecord = (req, res) => {
-    console.log('Controller: postPatientsHistory')
+    console.log('Controller: postPatientRecord')
     let record = req.body
     doctorSurgeryService.postPatientRecord(record).then((insertId) => {
     let result = {
