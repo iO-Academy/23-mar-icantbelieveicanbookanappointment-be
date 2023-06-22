@@ -139,7 +139,7 @@ const getPatientRecord = (req, res) => {
 }
 
 const postPatientRecord = (req, res) => {
-    console.log('Controller: postPatientsHistory')
+    console.log('Controller: postPatientRecord')
     let record = req.body
     doctorSurgeryService.postPatientRecord(record).then((insertId) => {
     let result = {
