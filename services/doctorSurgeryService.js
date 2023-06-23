@@ -78,7 +78,7 @@ const getPatientRecord = async (patientId) => {
     result.forEach((record) => {
       let date = new Date(Date.parse(record.date))
       let day = date.getDate()
-      let month = date.getMonth()
+      let month = date.getMonth() + 1
       let year = date.getFullYear()
 
       record.date = year + '-' + month + '-' + day
